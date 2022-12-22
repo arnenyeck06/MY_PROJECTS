@@ -102,7 +102,28 @@ select *, (Rolling_poepVac/Population_density)*100
 from #PercentPopVac
 
 
+Select continent SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, SUM(new_deaths)/SUM(New_Cases)*100 as DeathPercentage
+From coviddeaths
+--Where location like '%states%'
+where continent is not null 
+Group By continent; 
 
+-- QUERIES for tableau representation.
+Select SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, SUM(new_deaths)/SUM(New_Cases)*100 as DeathPercentage
+From coviddeaths
+where continent is not null
+ -- where location like '%France%'
+order by 1, 2;
+
+
+select distinct location from coviddeaths;
+Select location, SUM(new_deaths_per_million) as TotalDeathCount
+From coviddeaths
+-- Where location like '%states%'
+Where continent is null 
+-- and location not in ('World', 'European Union', 'International')
+Group by location
+order by TotalDeathCount desc;
 
 
 
