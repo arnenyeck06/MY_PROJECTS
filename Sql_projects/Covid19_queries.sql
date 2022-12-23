@@ -126,6 +126,19 @@ Group by location
 order by TotalDeathCount desc;
 
 
+Select location, population_density, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population_density))*100 as PercentPopulationInfected
+From coviddeaths
+-- Where location like '%states%'
+Group by location, population_density
+order by PercentPopulationInfected desc;
+
+
+Select location, population_density,date, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population_density))*100 as PercentPopulationInfected
+From coviddeaths
+-- Where location like '%states%'
+Group by location, population_density, date
+order by PercentPopulationInfected desc;
+
 
 
 
